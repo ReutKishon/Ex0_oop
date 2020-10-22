@@ -5,10 +5,17 @@ import java.util.List;
 
 public class Graph_DS implements graph {
 
-    private HashMap<Integer, node_data> nodes = new HashMap<>();
-    private HashMap<node_data, List<node_data>> edges = new HashMap<>();
-    private int modifyCount = 0;
-    private int edgeSize = 0;
+    private HashMap<Integer, node_data> nodes;
+    private HashMap<node_data, List<node_data>> edges;
+    private int modifyCount;
+    private int edgeSize;
+
+    public Graph_DS() {
+        this.nodes = new HashMap<>();
+        this.edges = new HashMap<>();
+        modifyCount = 0;
+        edgeSize = 0;
+    }
 
 
     @Override
@@ -34,6 +41,7 @@ public class Graph_DS implements graph {
     public void connect(int node1, int node2) {
         node_data node_1 = getNode(node1);
         node_data node_2 = getNode(node2);
+
         // node_1 isn't in the edges map ( doesn't connect to any nodes)
         if (!edges.containsKey(node_1)) {
             List<node_data> neighbors = new LinkedList<>();
@@ -79,7 +87,7 @@ public class Graph_DS implements graph {
 
         modifyCount++;
         //get the node
-        node_data deleted_node = nodes.get(key);
+        node_data deleted_node = getNode(key);
 
         // remove this node from all the neighbors lists of deleted_node
         for (int i = 0; i < edges.get(deleted_node).size(); i++) {

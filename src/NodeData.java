@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class NodeData implements node_data {
     private static int count = 0;
-    private int key = 0;
+    private int key;
     Collection<node_data> neighbors;
     Collection<Integer> neighbors_keys;
     String data;
@@ -10,6 +11,8 @@ public class NodeData implements node_data {
 
     public NodeData() {
         key = count++;
+        neighbors = new ArrayList<>();
+        neighbors_keys = new ArrayList<>();
     }
 
     @Override
