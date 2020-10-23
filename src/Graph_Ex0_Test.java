@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -7,11 +9,12 @@ public class Graph_Ex0_Test {
     static Random _rnd = new Random(seed);
     static int v_size = 10;
     static int e_size = v_size * 3;
-    static graph g0 = new Graph_DS(), g1;
+    static graph g0 = new Graph_DS();
     static graph_algorithms ga;
 
     public static void main(String[] args) {
-        test0();
+        ga = new Graph_Algo();
+        testShortestPath();
 //        test1();
 //        System.out.println(g0);
 //        test2();
@@ -20,9 +23,43 @@ public class Graph_Ex0_Test {
 //        System.out.println(g0);
     }
 
+    public static void testShortestPath() {
+
+        graph graph = new Graph_DS();
+        for (int i = 0; i < 6; i++) {
+            node_data n = new NodeData();
+            graph.addNode(n);
+        }
+
+        graph.connect(0, 1);
+        graph.connect(0, 2);
+        graph.connect(0, 3);
+        graph.connect(1, 4);
+        graph.connect(2, 5);
+        graph.connect(3, 5);
+        graph.connect(4, 5);
+
+        ga.init(graph);
+
+//        System.out.println(ga.shortestPathDist(0, 4));
+//
+//        for (node_data node : ga.shortestPath(0, 4)) {
+//            System.out.print(node.getKey() +" ");
+//
+//        }
+        System.out.println(ga.shortestPathDist(0, 3));
+
+        for (node_data node : ga.shortestPath(0, 3)) {
+            System.out.print(node.getKey() +" ");
+        }
+
+
+
+    }
+
     public static void test0() {
         graph graph = new Graph_DS();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
             node_data n = new NodeData();
             graph.addNode(n);
         }
@@ -32,17 +69,14 @@ public class Graph_Ex0_Test {
             System.out.print(n.getKey() + ",");
         }
 
-        graph.connect(0, 4);
-        graph.connect(0, 7);
-        graph.connect(7, 2);
-        graph.connect(1, 9);
-        graph.connect(9,1);
-        System.out.println();
-        System.out.println(graph.edgeSize());
-        System.out.println(graph.hasEdge(1, 9));
-        System.out.println(graph.hasEdge(1, 7));
-        System.out.println(graph.hasEdge(0, 4));
-        System.out.println(graph.getMC());
+        graph.connect(0, 1);
+        graph.connect(1, 3);
+        graph.connect(3, 5);
+        graph.connect(5, 2);
+//        graph.connect(2,4);
+        graph_algorithms GA = new Graph_Algo();
+        GA.init(graph);
+        System.out.println(GA.isConnected());
 
     }
 
