@@ -26,7 +26,7 @@ public class Graph_Ex0_Test {
     public static void testShortestPath() {
 
         graph graph = new Graph_DS();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             node_data n = new NodeData();
             graph.addNode(n);
         }
@@ -38,18 +38,39 @@ public class Graph_Ex0_Test {
         graph.connect(2, 5);
         graph.connect(3, 5);
         graph.connect(4, 5);
+        graph.connect(2, 6);
+        graph.connect(6, 1);
 
         ga.init(graph);
 
-//        System.out.println(ga.shortestPathDist(0, 4));
-//
-//        for (node_data node : ga.shortestPath(0, 4)) {
-//            System.out.print(node.getKey() +" ");
-//
-//        }
+        System.out.println(ga.shortestPathDist(0, 4));
+
+        for (node_data node : ga.shortestPath(0, 4)) {
+            System.out.print(node.getKey() +" ");
+
+        }
+        System.out.println();
+
         System.out.println(ga.shortestPathDist(0, 3));
 
         for (node_data node : ga.shortestPath(0, 3)) {
+            System.out.print(node.getKey() +" ");
+        }
+
+        System.out.println();
+
+        System.out.println(ga.shortestPathDist(3, 1));
+
+        for (node_data node : ga.shortestPath(3, 1)) {
+            System.out.print(node.getKey() +" ");
+        }
+
+
+        System.out.println();
+
+        System.out.println(ga.shortestPathDist(6, 3));
+
+        for (node_data node : ga.shortestPath(6, 3)) {
             System.out.print(node.getKey() +" ");
         }
 

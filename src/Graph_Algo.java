@@ -59,14 +59,18 @@ public class Graph_Algo implements graph_algorithms {
 
     @Override
     public List<node_data> shortestPath(int src, int dest) {
-        return shortestPathHelper(src, dest, new LinkedList<>()).stream().map(key -> graph.getNode(key)).collect(Collectors.toList());
+        var route = shortestPathHelper(src, dest, new LinkedList<>());
+        if (route != null) {
+            route.add(dest);
+        }
+
+        return route != null ? route.stream().map(key -> graph.getNode(key)).collect(Collectors.toList()) : null;
     }
 
     public List<Integer> shortestPathHelper(Integer currNode, Integer destNode, List<Integer> route) {
         if (route.contains(currNode)) return null;
 
         if (currNode.equals(destNode)) {
-            route.add(currNode);
             return route;
         }
 
@@ -79,8 +83,7 @@ public class Graph_Algo implements graph_algorithms {
 
             if (shortestResult != null && shortestRoute == null) {
                 shortestRoute = new LinkedList<>(shortestResult);
-            }
-            else if (shortestResult != null && shortestResult.size() < shortestRoute.size()) {
+            } else if (shortestResult != null && shortestResult.size() < shortestRoute.size()) {
                 shortestRoute = new LinkedList<>(shortestResult);
             }
         }
