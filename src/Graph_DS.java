@@ -1,7 +1,6 @@
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+
 
 public class Graph_DS implements graph {
 
@@ -15,9 +14,21 @@ public class Graph_DS implements graph {
         edgeSize = 0;
     }
 
+    public Graph_DS(graph g) {
+        this.nodes = new HashMap<>();
+        for (node_data nodeData : g.getV()) {
+            nodes.put(nodeData.getKey(), new NodeData(nodeData.getKey()));
+        }
+        this.modifyCount = g.getMC();
+        this.edgeSize = g.edgeSize();
+    }
+
 
     @Override
     public node_data getNode(int key) {
+        if (!nodes.containsKey(key)) {
+            return null;
+        }
         return nodes.get(key);
     }
 
@@ -35,9 +46,14 @@ public class Graph_DS implements graph {
 
     @Override
     public void connect(int node1, int node2) {
-        nodes.get(node1).addNi(nodes.get(node2));
-        nodes.get(node2).addNi(nodes.get(node1));
-        edgeSize++;
+
+        if (!nodes.get(node1).getNi().contains(nodes.get(node2))) {
+
+            nodes.get(node1).addNi(nodes.get(node2));
+            nodes.get(node2).addNi(nodes.get(node1));
+            edgeSize++;
+            modifyCount++;
+        }
     }
 
     @Override
@@ -61,8 +77,10 @@ public class Graph_DS implements graph {
         //get the node
         var deletedData = getNode(key);
         // remove this node from all the neighbors lists of deleted_node
-        for (node_data node_data : getV()) {
-            node_data.removeNode(node_data);
+        for (node_data neighbor : deletedData.getNi()) {
+            neighbor.removeNode(deletedData);
+            edgeSize--;
+
         }
         nodes.remove(key);
         return deletedData;
@@ -71,8 +89,11 @@ public class Graph_DS implements graph {
 
     @Override
     public void removeEdge(int node1, int node2) {
-        nodes.get(node1).removeNode(nodes.get(node2));
-        nodes.get(node2).removeNode(nodes.get(node1));
+        if (getNode(node1).getNi().contains(getNode(node2))) {
+            nodes.get(node1).removeNode(nodes.get(node2));
+            nodes.get(node2).removeNode(nodes.get(node1));
+            edgeSize--;
+        }
     }
 
     @Override
@@ -89,8 +110,6 @@ public class Graph_DS implements graph {
     public int getMC() {
         return modifyCount;
     }
-
-
 
 
 }

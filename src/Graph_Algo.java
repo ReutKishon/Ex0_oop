@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,48 +10,61 @@ public class Graph_Algo implements graph_algorithms {
     @Override
 
     public void init(graph g) {
-        this.graph = (Graph_DS) g;
+        this.graph = g;
     }
 
     @Override
     public graph copy() {
-        return null;
+
+        return new Graph_DS(graph);
     }
 
     @Override
     public boolean isConnected() {
-
-
-        //created visited array
-        boolean[] flag = new boolean[graph.nodeSize()];
+        if (graph.getNode(0) == null) {
+            return true;
+        }
 
         //start the DFS from vertex 0
-//        DFS_Algo(0, graph.getEdges(), flag);
+        BFS_Algo(0);
 
         //check if all the vertices are visited, if yes then graph is connected
 
-        for (boolean b : flag) {
-            if (!b) return false;
+        for (node_data nodeData : graph.getV()) {
+            if (nodeData.getTag() != 1) return false;
 
         }
         return true;
     }
 
 
-    public void DFS_Algo(int node, HashMap<Integer, List<Integer>> edges, boolean[] flag) {
+    public void BFS_Algo(int node) {
 
-        if (!flag[node]) {
-            flag[node] = true;
-        }
-        for (int i = 0; i < edges.get(node).size(); i++) {
-            var neighbor = edges.get(node).get(i);
-            if (!flag[neighbor]) {
-                DFS_Algo(neighbor, edges, flag);
+
+        // Create a queue for BFS
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+
+        // Mark the current node as visited and enqueue it
+        graph.getNode(node).setTag(1);
+        queue.add(node);
+
+        while (queue.size() != 0) {
+            // Dequeue a vertex from queue and print it
+            int tempNode = queue.poll();
+
+            // Get all adjacent vertices of the dequeued vertex s
+            // If a adjacent has not been visited, then mark it
+            // visited and enqueue it
+            for (node_data neighbor : graph.getNode(tempNode).getNi()) {
+                if (neighbor.getTag() != 1) {
+                    neighbor.setTag(1);
+
+                    queue.add(neighbor.getKey());
+                }
             }
         }
-
-
     }
+
 
     @Override
     public int shortestPathDist(int src, int dest) {
@@ -67,6 +81,7 @@ public class Graph_Algo implements graph_algorithms {
         return route != null ? route.stream().map(key -> graph.getNode(key)).collect(Collectors.toList()) : null;
     }
 
+    /// helper methods
     public List<Integer> shortestPathHelper(Integer currNode, Integer destNode, List<Integer> route) {
         if (route.contains(currNode)) return null;
 
