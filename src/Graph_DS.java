@@ -1,5 +1,6 @@
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 
 public class Graph_DS implements graph {
@@ -12,16 +13,18 @@ public class Graph_DS implements graph {
         this.nodes = new HashMap<>();
         modifyCount = 0;
         edgeSize = 0;
+        UniqueKey.count = 0;
+
     }
 
-    public Graph_DS(graph g) {
-        this.nodes = new HashMap<>();
-        for (node_data nodeData : g.getV()) {
-            nodes.put(nodeData.getKey(), new NodeData(nodeData.getKey()));
-        }
-        this.modifyCount = g.getMC();
-        this.edgeSize = g.edgeSize();
-    }
+//    public Graph_DS(graph g) {
+//        this.nodes = new HashMap<>();
+//        for (node_data node : g.getV()) {
+//            nodes.put(node.getKey(), new NodeData(node));
+//        }
+//        this.modifyCount = g.getMC();
+//        this.edgeSize = g.edgeSize();
+//    }
 
 
     @Override
@@ -46,7 +49,7 @@ public class Graph_DS implements graph {
 
     @Override
     public void connect(int node1, int node2) {
-
+        if (node1 == node2) return;
         if (!nodes.get(node1).getNi().contains(nodes.get(node2))) {
 
             nodes.get(node1).addNi(nodes.get(node2));
@@ -66,6 +69,7 @@ public class Graph_DS implements graph {
         return nodes.get(node_id).getNi();
     }
 
+
     @Override
     public node_data removeNode(int key) {
 
@@ -77,6 +81,7 @@ public class Graph_DS implements graph {
         //get the node
         var deletedData = getNode(key);
         // remove this node from all the neighbors lists of deleted_node
+
         for (node_data neighbor : deletedData.getNi()) {
             neighbor.removeNode(deletedData);
             edgeSize--;
@@ -89,12 +94,13 @@ public class Graph_DS implements graph {
 
     @Override
     public void removeEdge(int node1, int node2) {
-        if (getNode(node1).getNi().contains(getNode(node2))) {
-            nodes.get(node1).removeNode(nodes.get(node2));
-            nodes.get(node2).removeNode(nodes.get(node1));
-            edgeSize--;
-        }
+
+        if (!nodes.get(node1).getNi().contains(nodes.get(node2))) return;
+        nodes.get(node1).removeNode(nodes.get(node2));
+        nodes.get(node2).removeNode(nodes.get(node1));
+        edgeSize--;
     }
+
 
     @Override
     public int nodeSize() {

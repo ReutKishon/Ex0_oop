@@ -15,8 +15,23 @@ public class Graph_Algo implements graph_algorithms {
 
     @Override
     public graph copy() {
+        graph copyGraph = new Graph_DS();
+        //add nodes to the new graph
+        for (node_data node : graph.getV()) {
+            copyGraph.addNode(new NodeData(node.getKey(), node.getTag()));
+        }
+        //add edges to the new graph
+        for (node_data node : graph.getV()) {
 
-        return new Graph_DS(graph);
+            if (node.getNi().size() != 0) {
+                for (node_data neighbor : node.getNi()) {
+                    copyGraph.connect(node.getKey(), neighbor.getKey());
+                }
+
+            }
+        }
+
+        return copyGraph;
     }
 
     @Override
@@ -31,10 +46,20 @@ public class Graph_Algo implements graph_algorithms {
         //check if all the vertices are visited, if yes then graph is connected
 
         for (node_data nodeData : graph.getV()) {
-            if (nodeData.getTag() != 1) return false;
+            if (nodeData.getTag() != 1) {
+                resetTags();
+                return false;
+            }
 
         }
+        resetTags();
         return true;
+    }
+
+    public void resetTags() {
+        for (node_data node : graph.getV()) {
+            node.setTag(0);
+        }
     }
 
 
@@ -68,7 +93,9 @@ public class Graph_Algo implements graph_algorithms {
 
     @Override
     public int shortestPathDist(int src, int dest) {
-        return shortestPathDistHelper(src, dest, new LinkedList<>());
+        int res = shortestPathDistHelper(src, dest, new LinkedList<>());
+        if (res == Integer.MAX_VALUE) return -1;
+        return res;
     }
 
     @Override

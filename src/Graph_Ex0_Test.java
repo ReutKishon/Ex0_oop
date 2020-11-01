@@ -48,48 +48,47 @@ public class Graph_Ex0_Test {
         System.out.println("Running tests for Ex0 - this may take up to 10 seconds!");
 //        testShortestPath();
         long start = new Date().getTime();
-        try {
-            test0();
-        } catch (Exception e) {
-            e.printStackTrace();
-            _number_of_exception++;
-        }
-        try {
-            test1();
-        } catch (Exception e) {
-            e.printStackTrace();
-            _number_of_exception++;
-        }
+//        try {
+//            test0();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            _number_of_exception++;
+//        }
+//        try {
+//            test1();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            _number_of_exception++;
+//        }
 //        try {
 //            test2();
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //            _number_of_exception++;
 //        }
-        try {
-            test2a();
-        } catch (Exception e) {
-            e.printStackTrace();
-            _number_of_exception++;
-        }
-        try {
-            test9();
-        } catch (Exception e) {
-            e.printStackTrace();
-            _number_of_exception++;
-        }
 //        try {
-//            test_n(10, 9, 1, 1, 1);
+//            test2a();
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //            _number_of_exception++;
 //        }
-        try {
-            test_n(100, 235, 1, 47, 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            _number_of_exception++;
-        }
+//        try {
+//            test9();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            _number_of_exception++;
+//        }
+//        try { test_n(10, 9, 1, 1, 1);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            _number_of_exception++;
+//        }
+//        try {
+//            test_n(100, 235, 1, 47, 1);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            _number_of_exception++;
+//        }
 //        try {
 //            test_n(1000, 3400, 2, 19, 1);
 //        } catch (Exception e) {
@@ -103,18 +102,18 @@ public class Graph_Ex0_Test {
 //            e.printStackTrace();
 //            _number_of_exception++;
 //        }
-//        try {
-//            test_connectivity(100, 1);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
         try {
-            test_path(10, 1);
+            test_connectivity(30, 1);
         } catch (Exception e) {
             e.printStackTrace();
             _number_of_exception++;
         }
+//        try {
+//            test_path(10, 1);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            _number_of_exception++;
+//        }
         long end = new Date().getTime();
         double dt = (end - start) / 1000.0;
         boolean t = dt < 10;
