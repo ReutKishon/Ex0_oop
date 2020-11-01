@@ -1,8 +1,6 @@
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.Random;
 
 public class Graph_Algo implements graph_algorithms {
     private graph graph;
@@ -34,14 +32,15 @@ public class Graph_Algo implements graph_algorithms {
         return copyGraph;
     }
 
+
     @Override
     public boolean isConnected() {
-        if (graph.getNode(0) == null) {
+        if (graph.nodeSize() == 0) {
             return true;
         }
-
+        Iterator<node_data> it = graph.getV().iterator();
         //start the DFS from vertex 0
-        BFS_Algo(0);
+        BFS_Algo(it.next().getKey());
 
         //check if all the vertices are visited, if yes then graph is connected
 
@@ -93,9 +92,44 @@ public class Graph_Algo implements graph_algorithms {
 
     @Override
     public int shortestPathDist(int src, int dest) {
-        int res = shortestPathDistHelper(src, dest, new LinkedList<>());
-        if (res == Integer.MAX_VALUE) return -1;
-        return res;
+//        int res = shortestPathDistHelper(src, dest, new LinkedList<>());
+//        if (res == Integer.MAX_VALUE) return -1;
+//        return res;
+
+
+        // Initialize distances as 0
+        HashMap<Integer , Integer> distance  = new HashMap<>();
+
+        for (node_data node : graph.getV()) {
+            distance.put(node.getKey(),-1);
+        }
+
+        // queue to do BFS.
+        Queue<node_data> Q = new LinkedList<>();
+        distance.put(src,0);
+
+        Q.add(graph.getNode(src));
+        graph.getNode(src).setTag(1);
+        while (!Q.isEmpty())
+        {
+            node_data curr = Q.peek();
+            Q.poll();
+
+            for (node_data neighbor : curr.getNi())
+            {
+                if (neighbor.getTag() == 1)
+                    continue;
+
+                // update distance for i
+                distance.put(neighbor.getKey(),distance.get(curr.getKey()) + 1);
+                Q.add(neighbor);
+                neighbor.setTag(1);
+            }
+        }
+        resetTags();
+        return distance.get(dest);
+
+
     }
 
     @Override

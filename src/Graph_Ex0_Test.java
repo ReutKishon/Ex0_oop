@@ -48,72 +48,72 @@ public class Graph_Ex0_Test {
         System.out.println("Running tests for Ex0 - this may take up to 10 seconds!");
 //        testShortestPath();
         long start = new Date().getTime();
-//        try {
-//            test0();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        try {
-//            test1();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        try {
-//            test2();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        try {
-//            test2a();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        try {
-//            test9();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        try { test_n(10, 9, 1, 1, 1);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        try {
-//            test_n(100, 235, 1, 47, 1);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        try {
-//            test_n(1000, 3400, 2, 19, 1);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
-//        int no = 1000 * 50, ed = 302650;
-//        try {
-//            test_n(no, ed, 3, 9, 1000);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
         try {
-            test_connectivity(30, 1);
+            test0();
         } catch (Exception e) {
             e.printStackTrace();
             _number_of_exception++;
         }
-//        try {
-//            test_path(10, 1);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            _number_of_exception++;
-//        }
+        try {
+            test1();
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try {
+            test2();
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try {
+            test2a();
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try {
+            test9();
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try { test_n(10, 9, 1, 1, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try {
+            test_n(100, 235, 1, 47, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try {
+            test_n(1000, 3400, 2, 19, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        int no = 1000 * 50, ed = 302650;
+        try {
+            test_n(no, ed, 3, 9, 1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try {
+            test_connectivity(100, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
+        try {
+            test_path(10, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            _number_of_exception++;
+        }
         long end = new Date().getTime();
         double dt = (end - start) / 1000.0;
         boolean t = dt < 10;
@@ -187,7 +187,7 @@ public class Graph_Ex0_Test {
         ga0.init(g0);
         boolean b = ga0.isConnected();
         test("test2() ", b, false);
-//        test("test2() ", b, false);
+        test("test2() ", b, false);
 
     }
 
