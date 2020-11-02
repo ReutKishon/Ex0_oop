@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class NodeData implements node_data {
-//    private static int count = 0;
+    public static int count = 0;
     private int key;
 
     HashMap<Integer, node_data> neighbors;
@@ -13,7 +13,7 @@ public class NodeData implements node_data {
     int tag;
 
     public NodeData() {
-        key = UniqueKey.count++;
+        key = count++;
         neighbors = new HashMap<>();
         tag = 0;
     }

@@ -12,13 +12,14 @@ public class Graph_Algo implements graph_algorithms {
     }
 
     @Override
+
     public graph copy() {
         graph copyGraph = new Graph_DS();
         //add nodes to the new graph
         for (node_data node : graph.getV()) {
             copyGraph.addNode(new NodeData(node.getKey(), node.getTag()));
         }
-        //add edges to the new graph
+        //add edges to the new graph by connect method
         for (node_data node : graph.getV()) {
 
             if (node.getNi().size() != 0) {
@@ -39,18 +40,20 @@ public class Graph_Algo implements graph_algorithms {
             return true;
         }
         Iterator<node_data> it = graph.getV().iterator();
-        //start the DFS from vertex 0
+        //start the BFS from arbitrary vertex
         BFS_Algo(it.next().getKey());
 
         //check if all the vertices are visited, if yes then graph is connected
 
         for (node_data nodeData : graph.getV()) {
             if (nodeData.getTag() != 1) {
+                // reset the tags of all nodes back to 0 (unvisited) so it can be ready for the next method call.
                 resetTags();
                 return false;
             }
 
         }
+        // reset the tags of all nodes back to 0 (unvisited) so it can be ready for the next method call.
         resetTags();
         return true;
     }
@@ -97,35 +100,34 @@ public class Graph_Algo implements graph_algorithms {
 //        return res;
 
 
-        // Initialize distances as 0
-        HashMap<Integer , Integer> distance  = new HashMap<>();
+        HashMap<Integer, Integer> distance = new HashMap<>();
 
+        // Initialize distances as -1
         for (node_data node : graph.getV()) {
-            distance.put(node.getKey(),-1);
+            distance.put(node.getKey(), -1);
         }
 
-        // queue to do BFS.
-        Queue<node_data> Q = new LinkedList<>();
-        distance.put(src,0);
 
-        Q.add(graph.getNode(src));
+        Queue<node_data> queue = new LinkedList<>();
+        distance.put(src, 0);
+
+        queue.add(graph.getNode(src));
         graph.getNode(src).setTag(1);
-        while (!Q.isEmpty())
-        {
-            node_data curr = Q.peek();
-            Q.poll();
+        while (!queue.isEmpty()) {
+            node_data curr = queue.poll();
 
-            for (node_data neighbor : curr.getNi())
-            {
+// iterate over the neighbors of curr and if it unvisited - calculate the distance between src to the neighbor and set it as visited
+            for (node_data neighbor : curr.getNi()) {
                 if (neighbor.getTag() == 1)
                     continue;
 
                 // update distance for i
-                distance.put(neighbor.getKey(),distance.get(curr.getKey()) + 1);
-                Q.add(neighbor);
+                distance.put(neighbor.getKey(), distance.get(curr.getKey()) + 1);
+                queue.add(neighbor);
                 neighbor.setTag(1);
             }
         }
+        // reset the tags of all nodes back to 0 (unvisited) so it can be ready for the next method call.
         resetTags();
         return distance.get(dest);
 
@@ -168,22 +170,22 @@ public class Graph_Algo implements graph_algorithms {
         return shortestRoute;
     }
 
-    public int shortestPathDistHelper(int currNode, int destNode, List<Integer> route) {
-        if (currNode == destNode) return 0;
-        if (route.contains(currNode)) return Integer.MAX_VALUE;
-
-        route.add(currNode);
-        var minDist = Integer.MAX_VALUE;
-        for (var neighbor : graph.getNode(currNode).getNi()) {
-            var shortestResult = shortestPathDistHelper(neighbor.getKey(), destNode, route);
-
-            if (shortestResult != Integer.MAX_VALUE) {
-                minDist = Math.min(minDist, 1 + shortestResult);
-            }
-        }
-        route.removeIf(v -> v == currNode);
-
-        return minDist;
-    }
+//    public int shortestPathDistHelper(int currNode, int destNode, List<Integer> route) {
+//        if (currNode == destNode) return 0;
+//        if (route.contains(currNode)) return Integer.MAX_VALUE;
+//
+//        route.add(currNode);
+//        var minDist = Integer.MAX_VALUE;
+//        for (var neighbor : graph.getNode(currNode).getNi()) {
+//            var shortestResult = shortestPathDistHelper(neighbor.getKey(), destNode, route);
+//
+//            if (shortestResult != Integer.MAX_VALUE) {
+//                minDist = Math.min(minDist, 1 + shortestResult);
+//            }
+//        }
+//        route.removeIf(v -> v == currNode);
+//
+//        return minDist;
+//    }
 
 }

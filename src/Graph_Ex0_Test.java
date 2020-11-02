@@ -42,12 +42,14 @@ public class Graph_Ex0_Test {
 
     /**
      * Simple main, run all the tests.
+     *
      * @param args
      */
     public static void main(String[] args) {
         System.out.println("Running tests for Ex0 - this may take up to 10 seconds!");
 //        testShortestPath();
         long start = new Date().getTime();
+        testCopy();
         try {
             test0();
         } catch (Exception e) {
@@ -78,7 +80,8 @@ public class Graph_Ex0_Test {
             e.printStackTrace();
             _number_of_exception++;
         }
-        try { test_n(10, 9, 1, 1, 1);
+        try {
+            test_n(10, 9, 1, 1, 1);
         } catch (Exception e) {
             e.printStackTrace();
             _number_of_exception++;
@@ -129,6 +132,7 @@ public class Graph_Ex0_Test {
 
     /**
      * Generate a random graph with v_size nodes and e_size edges
+     *
      * @param v_size
      * @param e_size
      * @param seed
@@ -151,6 +155,14 @@ public class Graph_Ex0_Test {
             g.connect(i, j);
         }
         return g;
+    }
+
+    public static void testCopy() {
+        graph g = graph_creator(10, 12, 1);
+        graph_algorithms ga = new Graph_Algo();
+        ga.init(g);
+        graph copyGraph = ga.copy();
+        g.removeNode(0);
     }
 
     /**
@@ -228,10 +240,11 @@ public class Graph_Ex0_Test {
 
     /**
      * testing graph generation and connectivity
+     *
      * @param size - number of nodes
      * @param edge - number of edges
      * @param seed - the random seed
-     * @param tt - number of times for removing a group of nodes
+     * @param tt   - number of times for removing a group of nodes
      * @param jump - the group of nodes to be removed
      */
     public static void test_n(int size, int edge, int seed, int tt, int jump) {
@@ -253,7 +266,7 @@ public class Graph_Ex0_Test {
             i++;
         }
 
-        test("test_n(a) ", b,true);
+        test("test_n(a) ", b, true);
         b = ga.isConnected();
         //  System.out.println(g);
         //System.out.println(""+i+") "+g.nodeSize()+"  con: "+b);
@@ -262,6 +275,7 @@ public class Graph_Ex0_Test {
 
     /**
      * test connectivity & shortest path of a double-list like graph
+     *
      * @param size
      * @param seed
      */
@@ -291,6 +305,7 @@ public class Graph_Ex0_Test {
 
     /**
      * Simple test of shortest path
+     *
      * @param size
      * @param seed
      */
@@ -350,6 +365,7 @@ public class Graph_Ex0_Test {
     /**
      * Simple method for returning an array with all the node_data of the graph,
      * Note: this should be using an  Iterator<node_edge> to be fixed in Ex1
+     *
      * @param g
      * @return
      */
@@ -365,7 +381,6 @@ public class Graph_Ex0_Test {
         Arrays.sort(ans);
         return ans;
     }
-
 
 
 //import java.lang.reflect.Array;
