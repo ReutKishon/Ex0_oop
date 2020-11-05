@@ -15,14 +15,24 @@ edgeSize - return the number of edges in the graph by a local variable that incr
  
  
 The graph_Algo class implements graph_algorithms interface. this class has functions that activate on the graph.
- init - shallow copy (pointer) to the given graph. 
- copy - create a new graph and adding new nodes that have the same keys and neighbors like in the current graph.
- isConnected - To check connectivity of a graph, we will try to traverse all nodes using BFS traversal algorithm. 
+ 
+ * init - shallow copy (pointer) to the given graph. 
+
+ * copy - create a new graph and adding new nodes that have the same keys and neighbors like in the current graph.
+ 
+ * isConnected - To check connectivity of a graph, we will try to traverse all nodes using BFS traversal algorithm. 
  After completing the traversal, if there is any node, which is not visited, then the graph is not connected. because the definition of 
- connected graph that there is a valid path from every node to each other node.
- shortestPathDist- The claim for BFS is that the first time a node is discovered during the traversal, that distance from the source would give us the shortest path.
- I use queue because the FIFO idea that the first node to come in the queue would be the first to discover his neighbors and so on with his neighbors, it maintains the order of the nodes in the graph from
- source node ,and very efficient data structure.  I use the tag field in node_data to remark that a specific node was visited.
- ShortestPath: 
+ connected graph is that there is a valid path from every node to every other node.
+ 
+ * shortestPathDist- The claim for BFS is that the first time a node is discovered during the traversal, that distance from the source would give us the shortest path.
+ I used a queue because the FIFO idea that the first node to come in the queue would be the first to discover his neighbors and so on with his neighbors, it maintains the order of the nodes in the graph from
+ source node ,and very efficient data structure.  I use the tag field in node_data to mark that a specific node was visited.
+ 
+ * ShortestPath: Used backtracking with DFS to traverse all paths possible to the destination node while taking the shortest 
+ one. The base case for this function is first off checking the curr node was already in our path meaning we've circled back therefore we return NULL 
+ to signify no path was found. Secondly if curr node equals the dest node then we return the curr path. Lastly if all other conditions did not hold
+ then add curr node to curr path, then for each neighbor calculate recursively the path to dest. Save the shortest path from all recursive calls. 
+ Before returning the shortest path remove curr node from curr path to let the node previous in the call stack a chance to have a clean path to work with.
+ Return the shortest path.
                        
  

@@ -142,42 +142,6 @@ public class Graph_Algo implements graph_algorithms {
         return route != null ? route.stream().map(key -> graph.getNode(key)).collect(Collectors.toList()) : null;
     }
 
-//        int dist = shortestPathDist(src, dest);
-//        List<node_data> path = new LinkedList<>();
-//        path = DFSUtil2(graph.getNode(src), graph.getNode(dest), 0, dist, path);
-//        return path == null ? new LinkedList<>() : path;
-//    }
-
-
-//    List<node_data> DFSUtil2(node_data src, node_data dest, int i, int dist, List<node_data> path) {
-//
-//        if (i == dist && src == dest) {
-//            path.add(src);
-//            return path;
-//        }
-//        if (i == dist) return null;
-//
-//        if (i > dist) {
-//            return null;
-//        }
-//
-//        // Mark the current node as visited and print it
-//        src.setTag(1);
-//        path.add(src);
-//
-//        // Recur for all the vertices adjacent to this vertex
-//        for (node_data n : src.getNi()) {
-//            if (n.getTag() != 1) {
-//                var resultPath = DFSUtil2(n, dest, i + 1, dist, path);
-//                if (resultPath != null) return resultPath;
-//            }
-//        }
-//
-//        path.removeIf(v -> v == src);
-//
-//        return null;
-//    }
-
 
     /// helper methods
     public List<Integer> shortestPathHelper(Integer currNode, Integer destNode, List<Integer> route) {
@@ -194,9 +158,7 @@ public class Graph_Algo implements graph_algorithms {
 
             var shortestResult = shortestPathHelper(neighbor.getKey(), destNode, route);
 
-            if (shortestResult != null && shortestRoute == null) {
-                shortestRoute = new LinkedList<>(shortestResult);
-            } else if (shortestResult != null && shortestResult.size() < shortestRoute.size()) {
+            if (shortestResult != null && (shortestRoute == null || shortestResult.size() < shortestRoute.size())) {
                 shortestRoute = new LinkedList<>(shortestResult);
             }
         }
@@ -204,23 +166,6 @@ public class Graph_Algo implements graph_algorithms {
 
         return shortestRoute;
     }
-
-//    public int shortestPathDistHelper(int currNode, int destNode, List<Integer> route) {
-//        if (currNode == destNode) return 0;
-//        if (route.contains(currNode)) return Integer.MAX_VALUE;
-//
-//        route.add(currNode);
-//        var minDist = Integer.MAX_VALUE;
-//        for (var neighbor : graph.getNode(currNode).getNi()) {
-//            var shortestResult = shortestPathDistHelper(neighbor.getKey(), destNode, route);
-//
-//            if (shortestResult != Integer.MAX_VALUE) {
-//                minDist = Math.min(minDist, 1 + shortestResult);
-//            }
-//        }
-//        route.removeIf(v -> v == currNode);
-//
-//        return minDist;
-//    }
-
 }
+
+
