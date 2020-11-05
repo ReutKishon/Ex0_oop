@@ -1,9 +1,10 @@
+package ex0;
+
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.Random;
 
 public class Graph_Algo implements graph_algorithms {
-    private graph graph;
+    private ex0.graph graph;
 
     @Override
 
@@ -95,10 +96,6 @@ public class Graph_Algo implements graph_algorithms {
 
     @Override
     public int shortestPathDist(int src, int dest) {
-//        int res = shortestPathDistHelper(src, dest, new LinkedList<>());
-//        if (res == Integer.MAX_VALUE) return -1;
-//        return res;
-
 
         HashMap<Integer, Integer> distance = new HashMap<>();
 
@@ -122,6 +119,7 @@ public class Graph_Algo implements graph_algorithms {
                     continue;
 
                 // update distance for i
+
                 distance.put(neighbor.getKey(), distance.get(curr.getKey()) + 1);
                 queue.add(neighbor);
                 neighbor.setTag(1);
@@ -143,6 +141,43 @@ public class Graph_Algo implements graph_algorithms {
 
         return route != null ? route.stream().map(key -> graph.getNode(key)).collect(Collectors.toList()) : null;
     }
+
+//        int dist = shortestPathDist(src, dest);
+//        List<node_data> path = new LinkedList<>();
+//        path = DFSUtil2(graph.getNode(src), graph.getNode(dest), 0, dist, path);
+//        return path == null ? new LinkedList<>() : path;
+//    }
+
+
+//    List<node_data> DFSUtil2(node_data src, node_data dest, int i, int dist, List<node_data> path) {
+//
+//        if (i == dist && src == dest) {
+//            path.add(src);
+//            return path;
+//        }
+//        if (i == dist) return null;
+//
+//        if (i > dist) {
+//            return null;
+//        }
+//
+//        // Mark the current node as visited and print it
+//        src.setTag(1);
+//        path.add(src);
+//
+//        // Recur for all the vertices adjacent to this vertex
+//        for (node_data n : src.getNi()) {
+//            if (n.getTag() != 1) {
+//                var resultPath = DFSUtil2(n, dest, i + 1, dist, path);
+//                if (resultPath != null) return resultPath;
+//            }
+//        }
+//
+//        path.removeIf(v -> v == src);
+//
+//        return null;
+//    }
+
 
     /// helper methods
     public List<Integer> shortestPathHelper(Integer currNode, Integer destNode, List<Integer> route) {

@@ -1,6 +1,10 @@
+package ex0;
+
+import ex0.graph;
+import ex0.node_data;
+
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 
 public class Graph_DS implements graph {
@@ -82,7 +86,7 @@ public class Graph_DS implements graph {
             neighbor.removeNode(deletedData);
 
             edgeSize--;
-            modifyCount--;
+            modifyCount++;
 
         }
         nodes.remove(key);
@@ -98,6 +102,7 @@ public class Graph_DS implements graph {
         nodes.get(node1).removeNode(nodes.get(node2));
         nodes.get(node2).removeNode(nodes.get(node1));
         edgeSize--;
+        modifyCount++;
     }
 
 
