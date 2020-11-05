@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class NodeData implements node_data {
+    // generates unique id
     public static int count = 0;
     private int key;
 
@@ -18,7 +19,7 @@ public class NodeData implements node_data {
         neighbors = new HashMap<>();
         tag = 0;
     }
-
+// constructor for copy the graph
     public NodeData(int key, int tag) {
         this.neighbors = new HashMap<>();
         this.key = key;
